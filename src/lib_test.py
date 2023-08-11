@@ -1,4 +1,4 @@
 import lib
 
 def test_inc():
-    assert lib.inc(3) == 5
+    assert lib.inc(3) == 4
