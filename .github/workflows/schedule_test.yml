@@ -2,7 +2,7 @@ name: Schedule test
 
 on:
   schedule:
-    - cron:  '45 * * * *'
+    - cron:  '47 * * * *'
 
 
 jobs:
@@ -12,11 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Log push on Better Stack
+      - name: Scheduled workflow (log on Better Stack)
         run: |
           curl -X POST \
           -H 'Content-Type: application/json' \
           -H 'Authorization: ${{ secrets.BETTER_STACK_AUTH }}' \
-          -d '{"dt":"'"$(date -u +'%Y-%m-%d %T UTC')"'","message":"New push to upstream repo"}' \
+          -d '{"dt":"'"$(date -u +'%Y-%m-%d %T UTC')"'","message":"Still here"}' \
           -k \
           https://in.logs.betterstack.com
