@@ -16,6 +16,14 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Log push on Better Stack
+        run: |
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -H 'Authorization: ${{ secrets.BETTER_STACK_AUTH }}' \
+          -d '{"dt":"'"$(date -u +'%Y-%m-%d %T UTC')"'","message":"New push to upstream repo"}' \
+          -k \
+          https://in.logs.betterstack.com
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
