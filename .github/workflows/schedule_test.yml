@@ -1,0 +1,22 @@
+name: Schedule test
+
+on:
+  schedule:
+    - cron:  '45 * * * *'
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log push on Better Stack
+        run: |
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -H 'Authorization: ${{ secrets.BETTER_STACK_AUTH }}' \
+          -d '{"dt":"'"$(date -u +'%Y-%m-%d %T UTC')"'","message":"New push to upstream repo"}' \
+          -k \
+          https://in.logs.betterstack.com
